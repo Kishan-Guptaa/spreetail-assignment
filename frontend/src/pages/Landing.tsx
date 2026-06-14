@@ -209,7 +209,7 @@ export const Landing: React.FC = () => {
       </div>
 
       {/* Navigation Header */}
-      <motion.header 
+      <motion.header
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
@@ -243,9 +243,9 @@ export const Landing: React.FC = () => {
 
       {/* Hero Section */}
       <main className="max-w-7xl mx-auto w-full px-6 flex-1 flex flex-col lg:flex-row items-center justify-center gap-16 py-20 z-10">
-        
+
         {/* Left Column (Text) */}
-        <motion.div 
+        <motion.div
           className="flex-1 space-y-8 text-center lg:text-left z-20"
           variants={containerVariants}
           initial="hidden"
@@ -256,26 +256,26 @@ export const Landing: React.FC = () => {
               <Sparkles className="h-4 w-4 animate-pulse" /> Next-Gen Shared Expenses
             </div>
           </motion.div>
-          
-          <motion.h2 
+
+          <motion.h2
             variants={itemVariants}
             className="text-5xl sm:text-6xl lg:text-7.5xl font-black text-slate-900 dark:text-white leading-[1.05] tracking-tight drop-shadow-xl"
           >
-            Split expenses.<br/>
-            Detect anomalies.<br/>
+            Split expenses.<br />
+            Detect anomalies.<br />
             <span className="highlight-yellow inline-block mt-2 dark:text-black">
               Flow seamlessly.
             </span>
           </motion.h2>
 
-          <motion.p 
+          <motion.p
             variants={itemVariants}
             className="text-lg sm:text-xl text-slate-700 dark:text-slate-300 max-w-2xl mx-auto lg:mx-0 font-bold leading-relaxed"
           >
             Manage group balances, split bills using complex math, import CSV spreadsheets, and automatically catch database anomalies like duplicate expenses and blank fields.
           </motion.p>
 
-          <motion.div 
+          <motion.div
             variants={itemVariants}
             className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4"
           >
@@ -289,7 +289,7 @@ export const Landing: React.FC = () => {
         </motion.div>
 
         {/* Right Column (Interactive Mock Dashboard Window) */}
-        <motion.div 
+        <motion.div
           className="flex-1 w-full relative z-10"
           style={{ y: y1 }}
         >
@@ -306,7 +306,7 @@ export const Landing: React.FC = () => {
                 Interactive Demo ⚡
               </div>
             </div>
-            
+
             {/* Body */}
             <div className="flex-1 flex overflow-hidden">
               {/* Mini Sidebar */}
@@ -325,7 +325,7 @@ export const Landing: React.FC = () => {
                   <span className="text-xs font-bold truncate">Brad C.</span>
                 </div>
               </div>
-              
+
               {/* Main Area */}
               <div className="flex-1 flex flex-col overflow-hidden bg-white dark:bg-neutral-900">
                 {/* Mock Tabs */}
@@ -334,11 +334,10 @@ export const Landing: React.FC = () => {
                     <button
                       key={tab}
                       onClick={() => setHeroTab(tab)}
-                      className={`flex-1 py-2 text-xs font-black capitalize transition-colors border-r-2 border-black dark:border-white last:border-r-0 ${
-                        heroTab === tab
+                      className={`flex-1 py-2 text-xs font-black capitalize transition-colors border-r-2 border-black dark:border-white last:border-r-0 ${heroTab === tab
                           ? 'bg-[#ffe484] dark:bg-[#ffd54f] text-black font-black'
                           : 'text-slate-500 hover:text-black dark:hover:text-white'
-                      }`}
+                        }`}
                     >
                       {tab === 'ledger' && '📜 Ledger'}
                       {tab === 'balances' && '⚖️ Balances'}
@@ -346,7 +345,7 @@ export const Landing: React.FC = () => {
                     </button>
                   ))}
                 </div>
-                
+
                 {/* Tab Content */}
                 <div className="flex-1 p-4 overflow-y-auto scrollbar-thin flex flex-col justify-between">
                   <div className="space-y-2">
@@ -366,7 +365,7 @@ export const Landing: React.FC = () => {
                         ))}
                       </div>
                     )}
-                    
+
                     {heroTab === 'balances' && (
                       <div className="space-y-2">
                         {Object.entries(heroBalances).map(([name, bal]) => (
@@ -379,7 +378,7 @@ export const Landing: React.FC = () => {
                         ))}
                       </div>
                     )}
-                    
+
                     {heroTab === 'graph' && (
                       <div className="space-y-3">
                         <div className="text-[10px] font-black text-slate-400 uppercase">Simplified Settlement suggestions:</div>
@@ -409,7 +408,7 @@ export const Landing: React.FC = () => {
                       </div>
                     )}
                   </div>
-                  
+
                   {heroTab === 'ledger' && (
                     <button
                       onClick={handleAddMockExpense}
@@ -422,9 +421,9 @@ export const Landing: React.FC = () => {
               </div>
             </div>
           </div>
-          
+
           {/* Decorative floating blur behind card */}
-          <motion.div 
+          <motion.div
             style={{ y: y2 }}
             className="absolute -inset-10 bg-gradient-to-tr from-brand-500/20 to-indigo-500/20 blur-3xl -z-10 rounded-full mix-blend-multiply dark:mix-blend-screen"
           />
@@ -479,9 +478,9 @@ export const Landing: React.FC = () => {
             <div className="absolute top-4 right-4 bg-emerald-300 dark:bg-emerald-500 text-black border-2 border-black dark:border-white px-2 py-0.5 text-[10px] font-black uppercase rounded shadow-[1.5px_1.5px_0px_0px_#000] dark:shadow-[1.5px_1.5px_0px_0px_#fff]">
               Winner ⚡
             </div>
-            
+
             <h3 className="text-2xl font-black text-emerald-600 dark:text-emerald-400 mb-6 font-handwritten text-3xl">ExpenseFlow Engine</h3>
-            
+
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <span className="h-6 w-6 rounded-full bg-emerald-500/25 dark:bg-emerald-500/10 flex items-center justify-center text-emerald-600 dark:text-emerald-400 font-bold flex-shrink-0 mt-0.5">✓</span>
@@ -531,15 +530,14 @@ export const Landing: React.FC = () => {
               <h3 className="text-xl font-bold uppercase tracking-wider border-b-2 border-black dark:border-white pb-3 font-handwritten text-3xl">
                 Control Center
               </h3>
-              
+
               <div className="flex flex-col gap-3">
                 <button
                   onClick={() => setSandboxTab('simplifier')}
-                  className={`w-full text-left p-4 border-2 border-black dark:border-white rounded-xl transition-all flex items-center justify-between ${
-                    sandboxTab === 'simplifier'
+                  className={`w-full text-left p-4 border-2 border-black dark:border-white rounded-xl transition-all flex items-center justify-between ${sandboxTab === 'simplifier'
                       ? 'bg-[#ffe484] dark:bg-[#ffd54f] text-black shadow-[3px_3px_0px_0px_#000] dark:shadow-[3px_3px_0px_0px_#fff] scale-102'
                       : 'bg-white dark:bg-neutral-800 text-slate-705 dark:text-slate-300 shadow-[1px_1px_0px_0px_#000] dark:shadow-[1px_1px_0px_0px_#fff] hover:bg-slate-100 dark:hover:bg-neutral-700/50'
-                  }`}
+                    }`}
                 >
                   <div>
                     <div className="font-black text-sm">🧮 Debt Simplifier</div>
@@ -550,11 +548,10 @@ export const Landing: React.FC = () => {
 
                 <button
                   onClick={() => setSandboxTab('scanner')}
-                  className={`w-full text-left p-4 border-2 border-black dark:border-white rounded-xl transition-all flex items-center justify-between ${
-                    sandboxTab === 'scanner'
+                  className={`w-full text-left p-4 border-2 border-black dark:border-white rounded-xl transition-all flex items-center justify-between ${sandboxTab === 'scanner'
                       ? 'bg-[#a2e0ff] dark:bg-[#4ea8de] text-black shadow-[3px_3px_0px_0px_#000] dark:shadow-[3px_3px_0px_0px_#fff] scale-102'
                       : 'bg-white dark:bg-neutral-800 text-slate-705 dark:text-slate-300 shadow-[1px_1px_0px_0px_#000] dark:shadow-[1px_1px_0px_0px_#fff] hover:bg-slate-100 dark:hover:bg-neutral-700/50'
-                  }`}
+                    }`}
                 >
                   <div>
                     <div className="font-black text-sm">⚠️ CSV Anomaly Scanner</div>
@@ -565,11 +562,10 @@ export const Landing: React.FC = () => {
 
                 <button
                   onClick={() => setSandboxTab('timeline')}
-                  className={`w-full text-left p-4 border-2 border-black dark:border-white rounded-xl transition-all flex items-center justify-between ${
-                    sandboxTab === 'timeline'
+                  className={`w-full text-left p-4 border-2 border-black dark:border-white rounded-xl transition-all flex items-center justify-between ${sandboxTab === 'timeline'
                       ? 'bg-[#88fcb2] dark:bg-[#4ad66d] text-black shadow-[3px_3px_0px_0px_#000] dark:shadow-[3px_3px_0px_0px_#fff] scale-102'
                       : 'bg-white dark:bg-neutral-800 text-slate-705 dark:text-slate-300 shadow-[1px_1px_0px_0px_#000] dark:shadow-[1px_1px_0px_0px_#fff] hover:bg-slate-100 dark:hover:bg-neutral-700/50'
-                  }`}
+                    }`}
                 >
                   <div>
                     <div className="font-black text-sm">📅 Dynamic Timeline Splitter</div>
@@ -675,11 +671,10 @@ export const Landing: React.FC = () => {
                         <div className="col-span-5 pl-2 text-emerald-500 font-bold">✅ Clean</div>
                       </div>
 
-                      <div className={`grid grid-cols-12 items-center p-1.5 rounded transition-all duration-300 border ${
-                        isCsvAudited 
-                          ? 'opacity-40 line-through bg-rose-50/10 dark:bg-rose-950/10 border-slate-200 dark:border-neutral-800' 
+                      <div className={`grid grid-cols-12 items-center p-1.5 rounded transition-all duration-300 border ${isCsvAudited
+                          ? 'opacity-40 line-through bg-rose-50/10 dark:bg-rose-950/10 border-slate-200 dark:border-neutral-800'
                           : 'bg-rose-50 dark:bg-rose-950/20 border-rose-300 dark:border-rose-900'
-                      }`}>
+                        }`}>
                         <div className="col-span-3 font-bold">Cabin Stay</div>
                         <div className="col-span-2 text-right font-mono">$300.00</div>
                         <div className="col-span-2 pl-2">Brad</div>
@@ -731,21 +726,19 @@ export const Landing: React.FC = () => {
                       <div className="flex gap-2">
                         <button
                           onClick={() => setTimelineDate('june10')}
-                          className={`px-3 py-1 text-xs font-bold border-2 border-black dark:border-white rounded-lg transition-all ${
-                            timelineDate === 'june10'
+                          className={`px-3 py-1 text-xs font-bold border-2 border-black dark:border-white rounded-lg transition-all ${timelineDate === 'june10'
                               ? 'bg-[#ffe484] text-black shadow-[1.5px_1.5px_0px_0px_#000]'
                               : 'bg-white dark:bg-neutral-800 text-slate-700 dark:text-slate-300'
-                          }`}
+                            }`}
                         >
                           📅 June 10
                         </button>
                         <button
                           onClick={() => setTimelineDate('june20')}
-                          className={`px-3 py-1 text-xs font-bold border-2 border-black dark:border-white rounded-lg transition-all ${
-                            timelineDate === 'june20'
+                          className={`px-3 py-1 text-xs font-bold border-2 border-black dark:border-white rounded-lg transition-all ${timelineDate === 'june20'
                               ? 'bg-[#ffe484] text-black shadow-[1.5px_1.5px_0px_0px_#000]'
                               : 'bg-white dark:bg-neutral-800 text-slate-700 dark:text-slate-300'
-                          }`}
+                            }`}
                         >
                           📅 June 20
                         </button>
@@ -762,11 +755,10 @@ export const Landing: React.FC = () => {
                         <div className="text-[10px] text-slate-400 mt-1">Split portion: {timelineDate === 'june10' ? '$45.00 (50%)' : '$90.00 (100%)'}</div>
                       </div>
 
-                      <div className={`border p-2.5 rounded-lg transition-all ${
-                        timelineDate === 'june10' 
-                          ? 'border-slate-300 dark:border-neutral-700 bg-white dark:bg-neutral-900' 
+                      <div className={`border p-2.5 rounded-lg transition-all ${timelineDate === 'june10'
+                          ? 'border-slate-300 dark:border-neutral-700 bg-white dark:bg-neutral-900'
                           : 'border-rose-350 bg-rose-50/20 opacity-60 dark:bg-rose-950/10'
-                      }`}>
+                        }`}>
                         <div className="font-bold flex items-center justify-between">
                           <span>Johnny Cap</span>
                           {timelineDate === 'june10' ? (
@@ -783,8 +775,8 @@ export const Landing: React.FC = () => {
 
                     {/* Explanatory handwritten label */}
                     <div className="text-center font-handwritten text-indigo-600 dark:text-indigo-400 text-lg font-bold">
-                      {timelineDate === 'june10' 
-                        ? 'Both members are active on June 10. Split is calculated 50/50.' 
+                      {timelineDate === 'june10'
+                        ? 'Both members are active on June 10. Split is calculated 50/50.'
                         : 'Johnny Cap left on June 15. The solver automatically excludes him on June 20, leaving Mrs. Gable with 100% of the cost.'
                       }
                     </div>
@@ -907,11 +899,10 @@ export const Landing: React.FC = () => {
                 <button
                   key={member.id}
                   onClick={() => setSelectedCrew(member)}
-                  className={`p-2 border-2 border-black dark:border-white transition-all duration-150 flex flex-col items-center gap-1.5 hover:bg-slate-100 dark:hover:bg-neutral-800 rounded-lg ${
-                    selectedCrew.id === member.id
+                  className={`p-2 border-2 border-black dark:border-white transition-all duration-150 flex flex-col items-center gap-1.5 hover:bg-slate-100 dark:hover:bg-neutral-800 rounded-lg ${selectedCrew.id === member.id
                       ? 'bg-[#ffe484] dark:bg-[#ffd54f] text-black shadow-[3px_3px_0px_0px_#000] dark:shadow-[3px_3px_0px_0px_#fff] scale-105'
                       : 'bg-white dark:bg-neutral-900 shadow-[1px_1px_0px_0px_#000] dark:shadow-[1px_1px_0px_0px_#fff]'
-                  }`}
+                    }`}
                 >
                   <img
                     src={member.doodle}
@@ -1047,13 +1038,13 @@ export const Landing: React.FC = () => {
               Get updates about new audit rules, graph collapser upgrades, and sandbox extensions.
             </p>
             <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-2">
-              <input 
-                type="email" 
-                placeholder="you@example.com" 
-                className="w-full bg-slate-50 dark:bg-neutral-805 border-2 border-black dark:border-white px-3 py-1.5 focus:outline-none text-xs rounded-lg font-bold" 
+              <input
+                type="email"
+                placeholder="you@example.com"
+                className="w-full bg-slate-50 dark:bg-neutral-805 border-2 border-black dark:border-white px-3 py-1.5 focus:outline-none text-xs rounded-lg font-bold"
               />
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 className="btn-primary w-full text-xs py-2 shadow-[2px_2px_0px_0px_#000] dark:shadow-[2px_2px_0px_0px_#fff]"
               >
                 Subscribe 📬
