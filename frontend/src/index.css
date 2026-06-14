@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&family=Architects+Daughter&family=Caveat:wght@700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply antialiased text-slate-900 dark:text-neutral-100 transition-colors duration-300;
+    font-family: 'Comic Neue', 'Outfit', sans-serif;
+  }
+
+  body.dark {
+    @apply bg-neutral-950 text-neutral-100;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Architects Daughter', cursive;
+  }
+
+  input, select, textarea, button {
+    font-family: 'Comic Neue', sans-serif;
+  }
+}
+
+@layer components {
+  /* Modern Doodle Utilities with Straight Borders */
+  .glass-panel {
+    @apply bg-[#fdfbf6] dark:bg-neutral-900 border-[3px] border-black dark:border-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] transition-all duration-200 rounded-xl;
+  }
+
+  .glass-card {
+    @apply bg-white dark:bg-neutral-900 border-[3px] border-black dark:border-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[6px_6px_0px_0px_rgba(255,255,255,1)] transition-all duration-200 rounded-xl;
+  }
+
+  .glass-card-no-hover {
+    @apply bg-white dark:bg-neutral-900 border-[3px] border-black dark:border-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] rounded-xl;
+  }
+
+  .glass-input {
+    @apply bg-white dark:bg-neutral-800 border-[2.5px] border-black dark:border-white px-4 py-2.5 focus:outline-none dark:text-white transition-all duration-200 rounded-lg;
+  }
+
+  .glass-input:focus {
+    @apply shadow-[2.5px_2.5px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2.5px_2.5px_0px_0px_rgba(255,255,255,1)];
+  }
+
+  .btn-primary {
+    @apply bg-[#ffe484] hover:bg-[#ffd54f] text-black font-black px-5 py-2.5 border-[2.5px] border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all duration-100 flex items-center justify-center gap-2 disabled:opacity-50 disabled:pointer-events-none rounded-lg;
+  }
+  
+  .dark .btn-primary {
+    @apply bg-[#ffd54f] border-white text-black shadow-[3px_3px_0px_0px_rgba(255,255,255,1)] active:shadow-none;
+  }
+
+  .btn-secondary {
+    @apply bg-white hover:bg-neutral-100 text-black font-bold px-5 py-2.5 border-[2.5px] border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all duration-100 flex items-center justify-center gap-2 rounded-lg;
+  }
+  
+  .dark .btn-secondary {
+    @apply bg-neutral-800 hover:bg-neutral-700 text-white border-white shadow-[3px_3px_0px_0px_rgba(255,255,255,1)] active:shadow-none;
+  }
+
+  .btn-danger {
+    @apply bg-[#ff6b6b] hover:bg-[#ff4d4d] text-white font-black px-5 py-2.5 border-[2.5px] border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all duration-100 flex items-center justify-center gap-2 rounded-lg;
+  }
+  
+  .dark .btn-danger {
+    @apply border-white shadow-[3px_3px_0px_0px_rgba(255,255,255,1)] active:shadow-none;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply bg-black dark:bg-white border-2 border-transparent rounded-full;
+  }
+}
+
+/* Dotted Grid Sketchbook Background */
+.bg-mesh {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background-color: #fbfaf5;
+  background-image: radial-gradient(#d5cebe 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+}
+
+.dark .bg-mesh {
+  background-color: #121212;
+  background-image: radial-gradient(#2c2c2c 1.5px, transparent 1.5px);
+}
+
+.blob-1 {
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255, 228, 132, 0.25) 0%, rgba(255, 228, 132, 0) 70%);
+  border-radius: 50%;
+  filter: blur(60px);
+  animation: blob 10s infinite alternate ease-in-out;
+}
+
+.blob-2 {
+  position: absolute;
+  top: 20%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(162, 224, 255, 0.2) 0%, rgba(162, 224, 255, 0) 70%);
+  border-radius: 50%;
+  filter: blur(80px);
+  animation: blob 12s infinite alternate-reverse ease-in-out;
+  animation-delay: 2s;
+}
+
+.blob-3 {
+  position: absolute;
+  bottom: -20%;
+  left: 30%;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(255, 107, 107, 0.15) 0%, rgba(255, 107, 107, 0) 70%);
+  border-radius: 50%;
+  filter: blur(100px);
+  animation: blob 14s infinite alternate ease-in-out;
+  animation-delay: 4s;
+}
+
+.dark .blob-1 {
+  background: radial-gradient(circle, rgba(255, 228, 132, 0.1) 0%, rgba(255, 228, 132, 0) 70%);
+}
+.dark .blob-2 {
+  background: radial-gradient(circle, rgba(162, 224, 255, 0.08) 0%, rgba(162, 224, 255, 0) 70%);
+}
+.dark .blob-3 {
+  background: radial-gradient(circle, rgba(255, 107, 107, 0.05) 0%, rgba(255, 107, 107, 0) 70%);
+}
+
+.text-gradient {
+  background-size: 200% auto;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+/* Custom Highlight Markers */
+.highlight-yellow {
+  background: linear-gradient(104deg, rgba(255, 228, 132, 0.5) 0.9%, rgba(255, 228, 132, 0.3) 78.6%, rgba(255, 228, 132, 0.6) 90%);
+  border-radius: 4px;
+  padding: 0.15em 0.3em;
+}
+
+.highlight-cyan {
+  background: linear-gradient(104deg, rgba(162, 224, 255, 0.5) 0.9%, rgba(162, 224, 255, 0.35) 78.6%, rgba(162, 224, 255, 0.6) 90%);
+  border-radius: 4px;
+  padding: 0.15em 0.3em;
+}
+
+.highlight-pink {
+  background: linear-gradient(104deg, rgba(255, 107, 107, 0.35) 0.9%, rgba(255, 107, 107, 0.25) 78.6%, rgba(255, 107, 107, 0.45) 90%);
+  border-radius: 4px;
+  padding: 0.15em 0.3em;
+}
+
+.font-handwritten {
+  font-family: 'Caveat', cursive;
+}

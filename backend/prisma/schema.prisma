@@ -1,0 +1,156 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id           String          @id @default(uuid())
+  email        String          @unique
+  passwordHash String
+  name         String
+  avatarUrl    String?
+  role         String          @default("USER") // "USER", "ADMIN"
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+  groups       Group[]         @relation("CreatedGroups")
+  sessions     ImportSession[]
+  auditLogs    AuditLog[]
+}
+
+model Group {
+  id             String          @id @default(uuid())
+  name           String
+  description    String?
+  baseCurrency   String          @default("USD") // "USD", "INR", "EUR"
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  createdById    String
+  createdBy      User            @relation("CreatedGroups", fields: [createdById], references: [id])
+  members        GroupMember[]
+  expenses       Expense[]
+  settlements    Settlement[]
+  importSessions ImportSession[]
+}
+
+model GroupMember {
+  id                String               @id @default(uuid())
+  groupId           String
+  group             Group                @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  userId            String? // Link to registered User if they sign up
+  email             String
+  name              String
+  joinDate          DateTime             @default(now())
+  leaveDate         DateTime?
+  status            String               @default("ACTIVE") // "ACTIVE", "INACTIVE", "INVITED"
+  createdAt         DateTime             @default(now())
+  paidExpenses      Expense[]            @relation("ExpensePayer")
+  shares            ExpenseParticipant[]
+  paidSettlements   Settlement[]         @relation("SettlementPayer")
+  receivedSettlements Settlement[]       @relation("SettlementPayee")
+
+  @@unique([groupId, email])
+}
+
+model Expense {
+  id              String               @id @default(uuid())
+  groupId         String
+  group           Group                @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  title           String
+  description     String?
+  amount          Float
+  currency        String               @default("USD")
+  amountInBase    Float
+  date            DateTime
+  paidById        String
+  paidBy          GroupMember          @relation("ExpensePayer", fields: [paidById], references: [id], onDelete: Cascade)
+  splitType       String               @default("EQUAL") // "EQUAL", "PERCENTAGE", "EXACT", "SHARES", "CUSTOM"
+  notes           String?
+  attachmentUrl   String?
+  importSessionId String?
+  importSession   ImportSession?       @relation(fields: [importSessionId], references: [id], onDelete: SetNull)
+  createdAt       DateTime             @default(now())
+  updatedAt       DateTime             @updatedAt
+  participants    ExpenseParticipant[]
+}
+
+model ExpenseParticipant {
+  id                    String      @id @default(uuid())
+  expenseId             String
+  expense               Expense     @relation(fields: [expenseId], references: [id], onDelete: Cascade)
+  memberId              String
+  member                GroupMember @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  shareValue            Float       @default(0) // percentage, exact amount, or shares
+  calculatedShare       Float // actual amount owed in original currency
+  calculatedShareInBase Float // actual amount owed in group base currency
+}
+
+model Settlement {
+  id           String      @id @default(uuid())
+  groupId      String
+  group        Group       @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  payerId      String
+  payer        GroupMember @relation("SettlementPayer", fields: [payerId], references: [id], onDelete: Cascade)
+  payeeId      String
+  payee        GroupMember @relation("SettlementPayee", fields: [payeeId], references: [id], onDelete: Cascade)
+  amount       Float
+  currency     String      @default("USD")
+  amountInBase Float
+  date         DateTime    @default(now())
+  notes        String?
+  status       String      @default("SETTLED") // "PENDING", "SETTLED"
+  createdAt    DateTime    @default(now())
+}
+
+model ImportSession {
+  id           String        @id @default(uuid())
+  groupId      String
+  group        Group         @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  uploadedById String
+  uploadedBy   User          @relation(fields: [uploadedById], references: [id])
+  fileName     String
+  status       String        @default("PENDING") // "PENDING", "COMPLETED", "FAILED"
+  totalRows    Int           @default(0)
+  importedRows Int           @default(0)
+  skippedRows  Int           @default(0)
+  createdAt    DateTime      @default(now())
+  issues       ImportIssue[]
+  expenses     Expense[]
+}
+
+model ImportIssue {
+  id              String        @id @default(uuid())
+  sessionId       String
+  session         ImportSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  rowIndex        Int
+  rowData         String // JSON stringified original row values
+  issueType       String // "DUPLICATE", "NEGATIVE_AMOUNT", "INVALID_DATE", "UNKNOWN_MEMBER", etc.
+  severity        String // "ERROR", "WARNING", "INFO"
+  description     String
+  suggestedAction String // "REJECT", "APPROVE", "EDIT", "IGNORE"
+  status          String        @default("PENDING") // "PENDING", "APPROVED", "REJECTED", "IGNORED"
+  resolvedData    String? // JSON stringified modifications if the user edited it
+}
+
+model ExchangeRate {
+  id           String   @id @default(uuid())
+  fromCurrency String
+  toCurrency   String
+  rate         Float
+  updatedAt    DateTime @updatedAt
+
+  @@unique([fromCurrency, toCurrency])
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  action    String // e.g. "CREATE_GROUP", "IMPORT_CSV", "RESOLVE_ANOMALY"
+  details   String
+  ipAddress String?
+  createdAt DateTime @default(now())
+}
