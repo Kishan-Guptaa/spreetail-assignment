@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Sparkles, Users, FileSpreadsheet, Scale, ShieldCheck, ArrowRight, ArrowUpRight, Zap } from 'lucide-react';
+import { Sparkles, Users, Scale, ArrowRight, ArrowUpRight, Zap } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 const crewMembers = [
@@ -168,36 +168,7 @@ export const Landing: React.FC = () => {
     visible: { y: 0, opacity: 1, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
   };
 
-  const featureCards = [
-    {
-      icon: <Users className="h-7 w-7" />,
-      title: "Dynamic Membership",
-      desc: "Members participate in expenses only during their active periods. No more manual timeline checking.",
-      color: "text-brand-500 dark:text-brand-400",
-      bg: "bg-brand-500/10"
-    },
-    {
-      icon: <FileSpreadsheet className="h-7 w-7" />,
-      title: "Smart CSV Importer",
-      desc: "Upload expense exports, detect anomalies, and review issues inline before committing data to the database.",
-      color: "text-indigo-500 dark:text-indigo-400",
-      bg: "bg-indigo-500/10"
-    },
-    {
-      icon: <Scale className="h-7 w-7" />,
-      title: "Split Engines",
-      desc: "Calculate balances automatically by percentages, exact amounts, shares, or traditional equal splits.",
-      color: "text-emerald-500 dark:text-emerald-400",
-      bg: "bg-emerald-500/10"
-    },
-    {
-      icon: <ShieldCheck className="h-7 w-7" />,
-      title: "Debt Simplification",
-      desc: "Minimize cash transactions using a greedy graph simplification solver. Settle debts in fewer clicks.",
-      color: "text-amber-500 dark:text-amber-400",
-      bg: "bg-amber-500/10"
-    }
-  ];
+
 
   return (
     <div className="relative min-h-screen overflow-hidden flex flex-col justify-between bg-slate-50 dark:bg-slate-950 transition-colors duration-500">
@@ -947,9 +918,6 @@ export const Landing: React.FC = () => {
               <div className="space-y-2">
                 <p className="text-sm font-bold text-slate-800 dark:text-slate-200">
                   <span className="highlight-yellow font-black text-black">Expense Habits:</span> {selectedCrew.habit}
-                </p>
-                <p className="text-sm font-bold text-slate-650 dark:text-slate-400">
-                  {selectedCrew.desc}
                 </p>
               </div>
 
